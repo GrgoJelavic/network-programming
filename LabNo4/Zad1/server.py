@@ -1,15 +1,11 @@
-import socket
-server_socket = socket.socket()
-host = socket.gethostname()
-port = 9999
-server_socket.bind((host,port))
-print ("Waiting for connection...")
-server_socket.listen(5)
+
+from socket import *
+
+socket = socket(type=SOCK_DGRAM)
+
+socket.bind(('localhost',5001))
 
 while True:
-    conn,addr = server_socket.accept()
-    print ('Got Connection from', addr)
-    conn.send('Server Saying Hi'.encode())
-    conn.close()
-
-    # Odgovor: Drugi broj kod ispisa "Got connection..." se odnosi na broj porta (prikljucka)
+    data,addr = socket.recvfrom(1024)
+    print(data,addr)
+    socket.sendto(data,addr)

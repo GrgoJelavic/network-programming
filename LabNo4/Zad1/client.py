@@ -1,11 +1,9 @@
-import socket
-client_socket = socket.socket()
-host = socket.gethostname()
-port = 9999
+from socket import *
 
-client_socket.connect((host,port))
-print (client_socket.recv(1024))
+socket = socket(type=SOCK_DGRAM)
 
-client_socket.close()
+socket.sendto(b'Hello Server',('localhost',5001))
 
-# Odgovor: client_socket.connect((host,port)) govori serveru na koji ce se socket povezati
+data,addr = socket.recvfrom(1024)
+
+print(data,addr)
