@@ -1,4 +1,8 @@
 import socket
+import datetime
+from local_machine_info import print_machine_info
+
+print_machine_info()
 
 host = socket.gethostname()
 port = 12345
@@ -16,7 +20,10 @@ print ("Spojen: "), addr
 while True:
     data = conn.recv(1024)         # Prihvacanje podataka od klijenta
     if not data: break             # ako nema podataka izađi
-    conn.sendall(data)              # Vrati primljene podatke klijentu
+    conn.sendall(data)             # Vrati primljene podatke klijentu
+
+
+print(datetime.datetime.now())
 
 conn.close()
 
